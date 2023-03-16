@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=verysecretpassword
+    ports:
+      - "5432:5432"
+  
+  hotel:
+    container_name: hotel
+    build: . 
+    restart: on-failure
+    ports:
+    - "9090:9090"

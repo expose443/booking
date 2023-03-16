@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="static/css/admin.css">
+	<title>Admin Dashboard</title>
+</head>
+<style>
+</style>
+<body>
+	
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand"><i class='bx bxs-smile icon'></i> Admin</a>
+		<ul class="side-menu">
+			<li><a href="/dashboard"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
+			<li class="divider" data-text="main">Main</li>
+			<li><a href="/query-list" class="active" ><i class='bx bxs-chart icon' ></i> New Query</a></li>
+			<li><a href="/message-list"><i class='bx bxs-widget icon' ></i>Messages</a></li>
+			<li><a href="/rooms"><i class='bx bx-table icon' ></i> Rooms</a></li>
+			<li>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+	<!-- NAVBAR -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu toggle-sidebar' ></i>
+			<form action="#">
+				<div class="form-group">
+					<input type="text" placeholder="Search...">
+					<i class='bx bx-search icon' ></i>
+				</div>
+			</form>
+			<a href="#" class="nav-link">
+				<i class='bx bxs-bell icon' ></i>
+				<span class="badge">5</span>
+			</a>
+			<a href="#" class="nav-link">
+				<i class='bx bxs-message-square-dots icon' ></i>
+				<span class="badge">8</span>
+			</a>
+			<span class="divider"></span>
+			<div class="profile">
+				<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGVvcGxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="">
+				<ul class="profile-link">
+					<li><a href="#"><i class='bx bxs-user-circle icon' ></i> Profile</a></li>
+					<li><a href="#"><i class='bx bxs-cog' ></i> Settings</a></li>
+					<li><a href="/logout"><i class='bx bxs-log-out-circle' ></i> Logout</a></li>
+				</ul>
+			</div>
+		</nav>
+		<main>
+			<div class="data">
+				{{ range . }}
+				<div class="content-data">
+					<div class="head">
+						<h3>{{ .Author.FirstName}} {{.Author.LastName}} {{ .Author.Number}}</h3>
+						<div class="menu">
+							<i class='bx bxs-cog icon'></i>
+							<ul class="menu-link">
+								<li>
+									<form action="/query-list" method="post">
+										<input type="hidden" name="room_id" value="{{ .RoomID}}" readonly="true">
+										<input name="user_id" type="hidden" value="{{.UserId}}" readonly="true">
+										<label for="sub1"><a><input id="sub1"  style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;" type="submit" value="">Remove</a></label>
+									</form>
+							</ul>
+						</div>
+					</div>
+					<div class="chat-box">
+						<p class="day"><span>Today</span></p>
+						<div class="msg">
+							<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGVvcGxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="">
+							<div class="chat">
+								<p><span class="username">{{ .Room.Room_name}}</span></p>
+								<p><span>{{ .In}} - {{ .Out}}</span></p>
+							</div>
+						</div>
+					</div>
+					{{end}}
+				</div>
+			</div>
+		</main>
+	</section>	
+
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	<script src="static/js/admin.js"></script>
+</body>
+</html>
